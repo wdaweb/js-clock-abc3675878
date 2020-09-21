@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(130deg, white 50%, rgba(0, 0, 0, 0.2) 100%);
+      }
+
+      #clock {
+        width: 300px;
+        height: 300px;
+        background: white;
+        border-radius: 50%;
+        margin: auto;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 5px solid rgb(253, 253, 253);
+        box-shadow: inset 7px 5px 5px 3px rgba(0, 0, 0, 0.2), 18px 16px 10px 0px rgba(0, 0, 0, 0.2);
+      }
+
+      #hour {
+        position: absolute;
+        height: 10px;
+        width: 20%;
+        background: black;
+        border-radius: 5px;
+        left: 30%;
+        top: calc(50% - 5px);
+        transform: rotate(0deg);
+        transform-origin: right center;
+      }
+
+      #minute {
+        position: absolute;
+        height: 7px;
+        width: 40%;
+        background: black;
+        border-radius: 3.5px;
+        left: 10%;
+        top: calc(50% - 2.5px);
+        transform: rotate(0deg);
+        transform-origin: right center;
+      }
+
+      #second {
+        position: absolute;
+        height: 2px;
+        width: 45%;
+        background: rgb(248, 169, 21);
+        border-radius: 5px;
+        left: 5%;
+        top: calc(50% - 1px);
+        transform: rotate(0deg);
+        transform-origin: right center;
+        /* box-shadow: 3px -3px 3px 0px rgba(0, 0, 0, 0.2); */
+      }
+
+      .dot {
+        width: 14px;
+        height: 14px;
+        background: rgb(248, 169, 21);
+        border-radius: 50%;
+        position: absolute;
+        top: calc(50% - 7px);
+        left: calc(50% - 7px);
+        box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
+      }
+
+      .scale {
+        height: 3px;
+        width: 15px;
+        background: rgb(85, 85, 85);
+      }
+
+      .one {
+        position: absolute;
+        left: 50%;
+        top: 5%;
+        transform: translateX(-50%) rotate(90deg);
+      }
+
+      .two {
+        position: absolute;
+        right: 2.5%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .three {
+        position: absolute;
+        left: 50%;
+        bottom: 5%;
+        transform: translateX(-50%) rotate(90deg);
+      }
+
+      .four {
+        position: absolute;
+        left: 2.5%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      #btn_night {
+        position: absolute;
+        top: 83%;
+        left: 10%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+
+      #btn_light {
+        position: absolute;
+        top: 83%;
+        right: 10%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="clock">
+      <div class="scale one"></div>
+      <div class="scale two"></div>
+      <div class="scale three"></div>
+      <div class="scale four"></div>
+      <div id="hour"></div>
+      <div id="minute"></div>
+      <div id="second"></div>
+      <div class="dot"></div>
+    </div>
+
+    <img id="btn_night" src="/moon.png" alt="moon" />
+    <img id="btn_light" src="/sun.png" alt="sun" />
+
+    <script>
+      const hour = document.getElementById("hour");
+      const minute = document.getElementById("minute");
+      const second = document.getElementById("second");
+
+      const setClock = () => {
+        let now = new Date();
+        let h = now.getHours();
+        let m = now.getMinutes();
+        let s = now.getSeconds();
+
+        hour.style.transform = `rotate(${h * 30 + 90}deg)`;
+
+        minute.style.transform = `rotate(${m * 6 + 90}deg)`;
+
+        second.style.transform = `rotate(${s * 6 + 90}deg)`;
+      };
+
+      setInterval(setClock, 1000);
+      setClock();
+
+      const btn_night = document.getElementById("btn_night");
+      btn_night.onclick = () => {
+        document.body.style.transition = "5s";
+        document.body.style.background = "#2b2b2b";
+        clock.style.transition = "5s";
+        clock.style.background = "#1D1D1D";
+        clock.style.transition = "5s";
+        clock.style.border = "5px solid #111111";
+        btn.style.transition = "5s ease-in-out";
+      };
+
+      const btn_light = document.getElementById("btn_light");
+      btn_light.onclick = () => {
+        document.body.style.transition = "5s";
+        document.body.style.background = "white";
+        clock.style.transition = "5s";
+        clock.style.background = "white";
+        clock.style.transition = "5s";
+        clock.style.border = "5px solid rgb(253, 253, 253)";
+      };
+    </script>
+  </body>
+</html>
